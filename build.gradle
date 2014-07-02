@@ -31,7 +31,7 @@ archivesBaseName = "AlchemicalBling"
 
 minecraft {
     version = config.minecraft_version + "-" + config.forge_version
-    replaceIn "src/main/java/dmillerw/potion/AlchemicalBling.java"
+    replaceIn "src/main/java/dmillerw/bling/AlchemicalBling.java"
     replace "%MOD_VERSION%", config.mod_version
     replace "%FORGE_VERSION%", config.forge_version
 }
