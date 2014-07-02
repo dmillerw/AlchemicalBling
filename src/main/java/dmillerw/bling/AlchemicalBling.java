@@ -6,16 +6,15 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import dmillerw.bling.client.render.PotionEffectRenderer;
-import dmillerw.bling.entity.EntityPotionAmulet;
+import dmillerw.bling.entity.EntityBaublePotion;
 import dmillerw.bling.entity.EntitySplashPotion;
 import dmillerw.bling.handler.BlacklistHandler;
 import dmillerw.bling.handler.BrewingHandler;
 import dmillerw.bling.handler.EntityEventHandler;
 import dmillerw.bling.handler.EventHelper;
 import dmillerw.bling.item.ItemBrewableBottle;
-import dmillerw.bling.item.ItemInfusedAmulet;
-import dmillerw.bling.item.ItemMundaneAmulet;
 import dmillerw.bling.item.ItemSilverIngot;
+import dmillerw.bling.item.bauble.BaublePotion;
 import dmillerw.bling.recipe.RecipeIronBottle;
 import dmillerw.bling.recipe.RecipeSilver;
 import net.minecraft.init.Items;
@@ -43,8 +42,7 @@ public class AlchemicalBling {
 
 	public static File configFile;
 
-	public static Item mundaneAmulet;
-	public static Item infusedAmulet;
+	public static Item baublePotion;
 	public static Item ingotSilver;
 
 	//TODO Broken amulet?
@@ -76,21 +74,22 @@ public class AlchemicalBling {
 		}
 
 		/* REGISTRATION */
-		mundaneAmulet = new ItemMundaneAmulet().setUnlocalizedName("amulet.mundane");
-		infusedAmulet = new ItemInfusedAmulet().setUnlocalizedName("amulet.infused");
+		baublePotion = new BaublePotion().setUnlocalizedName("bauble.potion");
 		ingotSilver = new ItemSilverIngot().setUnlocalizedName("ingot.silver");
 
 		bottleIron = new ItemBrewableBottle(ItemBrewableBottle.IRON.getRGB()).setUnlocalizedName("bottle.iron");
 		bottleMoltenIron = new ItemBrewableBottle(ItemBrewableBottle.MOLTEN_IRON.getRGB()).setUnlocalizedName("bottle.molten_iron");
 		bottleSilver = new ItemBrewableBottle(ItemBrewableBottle.SILVER.getRGB()).setUnlocalizedName("bottle.silver");
 
-		GameRegistry.registerItem(mundaneAmulet, mundaneAmulet.getUnlocalizedName());
-		GameRegistry.registerItem(infusedAmulet, infusedAmulet.getUnlocalizedName());
+		GameRegistry.registerItem(baublePotion, baublePotion.getUnlocalizedName());
 		GameRegistry.registerItem(ingotSilver, ingotSilver.getUnlocalizedName());
 
 		GameRegistry.registerItem(bottleIron, bottleIron.getUnlocalizedName());
 		GameRegistry.registerItem(bottleMoltenIron, bottleMoltenIron.getUnlocalizedName());
 		GameRegistry.registerItem(bottleSilver, bottleSilver.getUnlocalizedName());
+
+		/* FILL STATIC REFERENCES */
+
 
 		if (registerSilverWithOreDictionary) {
 			OreDictionary.registerOre("ingotSilver", ingotSilver);
@@ -102,7 +101,7 @@ public class AlchemicalBling {
 		EventHelper.batchRegister(new EntityEventHandler(), new BrewingHandler());
 
 		EntityRegistry.registerModEntity(EntitySplashPotion.class, "splashPotion", 1, AlchemicalBling.instance, 64, 64, true);
-		EntityRegistry.registerModEntity(EntityPotionAmulet.class, "potionAmulet", 2, AlchemicalBling.instance, 64, 64, true);
+		EntityRegistry.registerModEntity(EntityBaublePotion.class, "potionAmulet", 2, AlchemicalBling.instance, 64, 64, true);
 
 		/* RECIPES */
 		GameRegistry.addRecipe(new RecipeIronBottle());
@@ -115,8 +114,9 @@ public class AlchemicalBling {
 
 		GameRegistry.addRecipe(new RecipeSilver());
 
+		/* AMULET */
 		GameRegistry.addShapedRecipe(
-			new ItemStack(mundaneAmulet),
+			new ItemStack(baublePotion, 1, 0),
 			" I ",
 			"IBI",
 			" D ",
@@ -125,12 +125,36 @@ public class AlchemicalBling {
 			'D', Items.diamond
 		);
 
+		/* RING */
+		GameRegistry.addShapedRecipe(
+			new ItemStack(baublePotion, 1, 1),
+			"DI ",
+			"IBI",
+			" I ",
+			'I', ingotSilver,
+			'B', new ItemStack(Items.potionitem, 1, OreDictionary.WILDCARD_VALUE),
+			'D', Items.diamond
+		);
+
+
 		if (allowOreDictionarySilver) {
+			/* AMULET */
 			GameRegistry.addRecipe(new ShapedOreRecipe(
-				new ItemStack(mundaneAmulet),
+				new ItemStack(baublePotion, 1, 0),
 				" I ",
 				"IBI",
 				" D ",
+				'I', "ingotSilver",
+				'B', new ItemStack(Items.potionitem, 1, OreDictionary.WILDCARD_VALUE),
+				'D', Items.diamond
+			));
+
+			/* RING */
+			GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(baublePotion, 1, 0),
+				"DI ",
+				"IBI",
+				" I ",
 				'I', "ingotSilver",
 				'B', new ItemStack(Items.potionitem, 1, OreDictionary.WILDCARD_VALUE),
 				'D', Items.diamond

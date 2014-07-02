@@ -1,5 +1,8 @@
-item.amulet.mundane.name=Mundane Amulet
-item.amulet.infused.name=Infused Amulet
+item.bauble.potion.amulet.mundane.name=Mundane Amulet
+item.bauble.potion.amulet.infused.name=Infused Amulet
+
+item.bauble.potion.ring.mundane.name=Mundane Ring
+item.bauble.potion.ring.infused.name=Infused Ring
 
 item.bottle.iron.name=Bottle of Iron
 item.bottle.molten_iron.name=Bottle of Molten Iron

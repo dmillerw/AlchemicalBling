@@ -1,31 +1,30 @@
 package dmillerw.bling.entity;
 
-import dmillerw.bling.AlchemicalBling;
 import dmillerw.bling.handler.BlacklistHandler;
+import dmillerw.bling.helper.BaublePotionHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 /**
  * @author dmillerw
  */
-public class EntityPotionAmulet extends EntityItem {
+public class EntityBaublePotion extends EntityItem {
 
-	public EntityPotionAmulet(World world) {
+	public EntityBaublePotion(World world) {
 		super(world);
 	}
 
-	public EntityPotionAmulet(World world, double posX, double posY, double posZ) {
+	public EntityBaublePotion(World world, double posX, double posY, double posZ) {
 		super(world, posX, posY, posZ);
 	}
 
-	public EntityPotionAmulet(World world, double posX, double posY, double posZ, ItemStack stack) {
+	public EntityBaublePotion(World world, double posX, double posY, double posZ, ItemStack stack) {
 		super(world, posX, posY, posZ, stack);
 	}
 
-	public EntityPotionAmulet(EntityItem item) {
+	public EntityBaublePotion(EntityItem item) {
 		this(item.worldObj, item.posX, item.posY, item.posZ, item.getEntityItem());
 		this.delayBeforeCanPickup = 10;
 		this.motionX = item.motionX;
@@ -35,11 +34,8 @@ public class EntityPotionAmulet extends EntityItem {
 
 	public void onPotionSplash(PotionEffect effect) {
 		if (BlacklistHandler.canUse(effect.getPotionID())) {
-			ItemStack stack = new ItemStack(AlchemicalBling.infusedAmulet, 1, effect.getPotionID());
-			NBTTagCompound nbt = new NBTTagCompound();
-			nbt.setInteger("amp", effect.getAmplifier());
-			stack.setTagCompound(nbt);
-			this.setEntityItemStack(stack);
+			ItemStack stack = getEntityItem();
+			BaublePotionHelper.addPotionEffectToItem(stack, effect.getPotionID(), effect.getAmplifier());
 		}
 	}
 }

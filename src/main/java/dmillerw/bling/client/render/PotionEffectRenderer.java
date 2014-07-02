@@ -111,7 +111,6 @@ public class PotionEffectRenderer {
 		Collection collection = mc.thePlayer.getActivePotionEffects();
 
 		if (!collection.isEmpty()) {
-			mc.getTextureManager().bindTexture(INVENTORY);
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glDisable(GL11.GL_LIGHTING);
@@ -125,6 +124,7 @@ public class PotionEffectRenderer {
 				PotionEffect potioneffect = (PotionEffect) iterator.next();
 
 				if (potioneffect instanceof BaublePotionEffect) {
+					mc.getTextureManager().bindTexture(INVENTORY);
 					Potion potion = Potion.potionTypes[potioneffect.getPotionID()];
 					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 					event.gui.drawTexturedModalRect(i, j, 0, 166, 140, 32);
