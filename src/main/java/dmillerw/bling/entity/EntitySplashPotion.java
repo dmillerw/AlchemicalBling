@@ -1,4 +1,4 @@
-package dmillerw.potion.entity;
+package dmillerw.bling.entity;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityPotion;

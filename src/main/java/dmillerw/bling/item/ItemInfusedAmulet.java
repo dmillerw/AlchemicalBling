@@ -1,12 +1,12 @@
-package dmillerw.potion.item;
+package dmillerw.bling.item;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import com.google.common.collect.HashMultimap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import dmillerw.potion.helper.AmuletHelper;
-import dmillerw.potion.helper.BaublePotionEffect;
+import dmillerw.bling.helper.AmuletHelper;
+import dmillerw.bling.helper.BaublePotionEffect;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;

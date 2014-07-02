@@ -1,4 +1,4 @@
-package dmillerw.potion.item;
+package dmillerw.bling.item;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

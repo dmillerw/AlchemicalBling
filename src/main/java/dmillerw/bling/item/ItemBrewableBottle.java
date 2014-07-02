@@ -1,4 +1,4 @@
-package dmillerw.potion.item;
+package dmillerw.bling.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -20,14 +20,23 @@ import java.util.List;
 /**
  * @author dmillerw
  */
-public class ItemIronBottle extends ItemPotion {
+public class ItemBrewableBottle extends ItemPotion {
 
-	private static final Color IRON = new Color(122, 122, 122);
-	private static final Color MOLTEN_IRON = new Color(155, 122, 122);
-	private static final Color SILVER = new Color(200, 200, 200);
+	public static final Color IRON = new Color(122, 122, 122);
+	public static final Color MOLTEN_IRON = new Color(155, 122, 122);
+	public static final Color SILVER = new Color(200, 200, 200);
 
 	private IIcon bottle;
 	private IIcon overlay;
+
+	private int color;
+
+	public ItemBrewableBottle(int color) {
+		this.color = color;
+
+		setMaxStackSize(16);
+		setTextureName("potion");
+	}
 
 	@Override
 	public List getEffects(ItemStack stack) {
@@ -46,12 +55,7 @@ public class ItemIronBottle extends ItemPotion {
 
 	@Override
 	public int getColorFromDamage(int damage) {
-		switch (damage) {
-			case 0: return IRON.getRGB();
-			case 1: return MOLTEN_IRON.getRGB();
-			case 2: return SILVER.getRGB();
-			default: return IRON.getRGB();
-		}
+		return color;
 	}
 
 	@Override
@@ -61,20 +65,12 @@ public class ItemIronBottle extends ItemPotion {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		if (stack.getItemDamage() == 0) {
-			return StatCollector.translateToLocal("item.iron_bottle.name").trim();
-		} else if (stack.getItemDamage() == 1) {
-			return StatCollector.translateToLocal("item.iron_bottle.molten.name").trim();
-		} else {
-			return StatCollector.translateToLocal("item.silver_bottle.name").trim();
-		}
+		return StatCollector.translateToLocal(getUnlocalizedName() + ".name").trim();
 	}
 
 	@Override
 	public void getSubItems(Item item, CreativeTabs tab, List list) {
-		list.add(new ItemStack(this, 1, 0));
-		list.add(new ItemStack(this, 1, 1));
-		list.add(new ItemStack(this, 1, 2));
+		list.add(new ItemStack(this));
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -90,7 +86,7 @@ public class ItemIronBottle extends ItemPotion {
 
 	@Override
 	public boolean hasContainerItem(ItemStack stack) {
-		return stack.getItemDamage() == 2;
+		return true;
 	}
 
 	@Override

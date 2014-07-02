@@ -1,4 +1,4 @@
-package dmillerw.potion.helper;
+package dmillerw.bling.helper;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;

@@ -1,7 +1,7 @@
-package dmillerw.potion.handler;
+package dmillerw.bling.handler;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import dmillerw.potion.entity.EntitySplashPotion;
+import dmillerw.bling.entity.EntitySplashPotion;
 import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 

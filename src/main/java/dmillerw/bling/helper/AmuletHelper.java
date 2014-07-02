@@ -1,6 +1,6 @@
-package dmillerw.potion.helper;
+package dmillerw.bling.helper;
 
-import dmillerw.potion.handler.BlacklistHandler;
+import dmillerw.bling.handler.BlacklistHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 

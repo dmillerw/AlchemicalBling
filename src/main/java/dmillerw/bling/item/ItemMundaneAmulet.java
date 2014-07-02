@@ -1,6 +1,6 @@
-package dmillerw.potion.item;
+package dmillerw.bling.item;
 
-import dmillerw.potion.entity.EntityPotionAmulet;
+import dmillerw.bling.entity.EntityPotionAmulet;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;

@@ -1,19 +1,23 @@
-package dmillerw.potion;
+package dmillerw.bling;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import dmillerw.potion.client.render.EffectRenderer;
-import dmillerw.potion.entity.EntityPotionAmulet;
-import dmillerw.potion.entity.EntitySplashPotion;
-import dmillerw.potion.handler.BlacklistHandler;
-import dmillerw.potion.handler.EntityEventHandler;
-import dmillerw.potion.item.ItemInfusedAmulet;
-import dmillerw.potion.item.ItemIronBottle;
-import dmillerw.potion.item.ItemMundaneAmulet;
-import dmillerw.potion.item.ItemSilverIngot;
+import dmillerw.bling.client.render.EffectRenderer;
+import dmillerw.bling.entity.EntityPotionAmulet;
+import dmillerw.bling.entity.EntitySplashPotion;
+import dmillerw.bling.handler.BlacklistHandler;
+import dmillerw.bling.handler.BrewingHandler;
+import dmillerw.bling.handler.EntityEventHandler;
+import dmillerw.bling.handler.EventHelper;
+import dmillerw.bling.item.ItemBrewableBottle;
+import dmillerw.bling.item.ItemInfusedAmulet;
+import dmillerw.bling.item.ItemMundaneAmulet;
+import dmillerw.bling.item.ItemSilverIngot;
+import dmillerw.bling.recipe.RecipeIronBottle;
+import dmillerw.bling.recipe.RecipeSilver;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -41,8 +45,13 @@ public class AlchemicalBling {
 
 	public static Item mundaneAmulet;
 	public static Item infusedAmulet;
-	public static Item ironBottle;
-	public static Item silverIngot;
+	public static Item ingotSilver;
+
+	/* Ugly, but unfortunately necessary */
+	public static Item bottleIron;
+	public static Item bottleMoltenIron;
+	public static Item bottleSilver;
+	/* End the ugliness! */
 
 	public static boolean registerSilverWithOreDictionary = true;
 	public static boolean allowOreDictionarySilver = true;
@@ -69,57 +78,49 @@ public class AlchemicalBling {
 		/* REGISTRATION */
 		mundaneAmulet = new ItemMundaneAmulet().setUnlocalizedName("amulet.mundane");
 		infusedAmulet = new ItemInfusedAmulet().setUnlocalizedName("amulet.infused");
-		ironBottle = new ItemIronBottle().setUnlocalizedName("iron_bottle").setTextureName("potion");
-		silverIngot = new ItemSilverIngot().setUnlocalizedName("ingot.silver");
+		ingotSilver = new ItemSilverIngot().setUnlocalizedName("ingot.silver");
+
+		bottleIron = new ItemBrewableBottle(ItemBrewableBottle.IRON.getRGB()).setUnlocalizedName("bottle.iron");
+		bottleMoltenIron = new ItemBrewableBottle(ItemBrewableBottle.MOLTEN_IRON.getRGB()).setUnlocalizedName("bottle.molten_iron");
+		bottleSilver = new ItemBrewableBottle(ItemBrewableBottle.SILVER.getRGB()).setUnlocalizedName("bottle.silver");
 
 		GameRegistry.registerItem(mundaneAmulet, mundaneAmulet.getUnlocalizedName());
 		GameRegistry.registerItem(infusedAmulet, infusedAmulet.getUnlocalizedName());
-		GameRegistry.registerItem(ironBottle, ironBottle.getUnlocalizedName());
-		GameRegistry.registerItem(silverIngot, silverIngot.getUnlocalizedName());
+		GameRegistry.registerItem(ingotSilver, ingotSilver.getUnlocalizedName());
+
+		GameRegistry.registerItem(bottleIron, bottleIron.getUnlocalizedName());
+		GameRegistry.registerItem(bottleMoltenIron, bottleMoltenIron.getUnlocalizedName());
+		GameRegistry.registerItem(bottleSilver, bottleSilver.getUnlocalizedName());
 
 		if (registerSilverWithOreDictionary) {
-			OreDictionary.registerOre("ingotSilver", silverIngot);
+			OreDictionary.registerOre("ingotSilver", ingotSilver);
 		}
 
 		if (event.getSide().isClient()) {
 			MinecraftForge.EVENT_BUS.register(new EffectRenderer());
 		}
-		MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
+		EventHelper.batchRegister(new EntityEventHandler(), new BrewingHandler());
 
 		EntityRegistry.registerModEntity(EntitySplashPotion.class, "splashPotion", 1, AlchemicalBling.instance, 64, 64, true);
 		EntityRegistry.registerModEntity(EntityPotionAmulet.class, "potionAmulet", 2, AlchemicalBling.instance, 64, 64, true);
 
 		/* RECIPES */
-		GameRegistry.addShapelessRecipe(
-			new ItemStack(ironBottle, 1, 0),
-			Items.iron_ingot,
-			Items.glass_bottle
-		);
+		GameRegistry.addRecipe(new RecipeIronBottle());
 
 		GameRegistry.addSmelting(
-			new ItemStack(ironBottle, 1, 0),
-			new ItemStack(ironBottle, 1, 1),
+			new ItemStack(bottleIron),
+			new ItemStack(bottleMoltenIron),
 			0F
 		);
 
-		GameRegistry.addShapelessRecipe(
-			new ItemStack(silverIngot),
-			new ItemStack(ironBottle, 1, 2)
-		);
-
-		GameRegistry.addShapelessRecipe(
-			new ItemStack(ironBottle, 1, 2),
-			new ItemStack(ironBottle, 1, 1),
-			Items.ghast_tear,
-			Items.glowstone_dust
-		);
+		GameRegistry.addRecipe(new RecipeSilver());
 
 		GameRegistry.addShapedRecipe(
 			new ItemStack(mundaneAmulet),
 			" I ",
 			"IBI",
 			" D ",
-			'I', silverIngot,
+			'I', ingotSilver,
 			'B', new ItemStack(Items.potionitem, 1, OreDictionary.WILDCARD_VALUE),
 			'D', Items.diamond
 		);

@@ -1,8 +1,8 @@
 item.amulet.mundane.name=Mundane Amulet
 item.amulet.infused.name=Infused Amulet
 
-item.iron_bottle.name=Bottle of Iron
-item.iron_bottle.molten=Bottle of Molten Iron
-item.silver_bottle.name=Bottle of Silver
+item.bottle.iron.name=Bottle of Iron
+item.bottle.molten_iron.name=Bottle of Molten Iron
+item.bottle.silver.name=Bottle of Silver
 
-item.ingot_silver.name=Silver Ingot
+item.ingot.silver.name=Silver Ingot

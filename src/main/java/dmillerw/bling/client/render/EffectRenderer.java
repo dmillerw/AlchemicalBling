@@ -1,8 +1,8 @@
-package dmillerw.potion.client.render;
+package dmillerw.bling.client.render;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.ReflectionHelper;
-import dmillerw.potion.helper.BaublePotionEffect;
+import dmillerw.bling.helper.BaublePotionEffect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;

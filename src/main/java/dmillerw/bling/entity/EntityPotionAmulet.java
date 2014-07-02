@@ -1,7 +1,7 @@
-package dmillerw.potion.entity;
+package dmillerw.bling.entity;
 
-import dmillerw.potion.AlchemicalBling;
-import dmillerw.potion.handler.BlacklistHandler;
+import dmillerw.bling.AlchemicalBling;
+import dmillerw.bling.handler.BlacklistHandler;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

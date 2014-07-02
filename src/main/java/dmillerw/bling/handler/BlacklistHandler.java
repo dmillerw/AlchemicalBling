@@ -1,4 +1,4 @@
-package dmillerw.potion.handler;
+package dmillerw.bling.handler;
 
 import com.google.common.collect.Sets;
 import net.minecraft.potion.Potion;
