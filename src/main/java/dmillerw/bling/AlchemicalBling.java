@@ -5,7 +5,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import dmillerw.bling.client.render.EffectRenderer;
+import dmillerw.bling.client.render.PotionEffectRenderer;
 import dmillerw.bling.entity.EntityPotionAmulet;
 import dmillerw.bling.entity.EntitySplashPotion;
 import dmillerw.bling.handler.BlacklistHandler;
@@ -97,7 +97,7 @@ public class AlchemicalBling {
 		}
 
 		if (event.getSide().isClient()) {
-			MinecraftForge.EVENT_BUS.register(new EffectRenderer());
+			MinecraftForge.EVENT_BUS.register(new PotionEffectRenderer());
 		}
 		EventHelper.batchRegister(new EntityEventHandler(), new BrewingHandler());
 

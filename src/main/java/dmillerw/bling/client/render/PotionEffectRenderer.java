@@ -21,7 +21,7 @@ import java.util.Iterator;
 /**
  * @author dmillerw
  */
-public class EffectRenderer {
+public class PotionEffectRenderer {
 
 	private static final ResourceLocation INVENTORY = new ResourceLocation("textures/gui/container/inventory.png");
 
