@@ -1,12 +1,14 @@
 package dmillerw.potion;
 
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import dmillerw.potion.client.render.EffectRenderer;
 import dmillerw.potion.entity.EntityPotionAmulet;
 import dmillerw.potion.entity.EntitySplashPotion;
+import dmillerw.potion.handler.BlacklistHandler;
 import dmillerw.potion.handler.EntityEventHandler;
 import dmillerw.potion.item.ItemInfusedAmulet;
 import dmillerw.potion.item.ItemIronBottle;
@@ -15,10 +17,13 @@ import dmillerw.potion.item.ItemSilverIngot;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+
+import java.io.File;
 
 /**
  * @author dmillerw
@@ -32,6 +37,8 @@ public class AlchemicalBling {
 	@Mod.Instance(AlchemicalBling.ID)
 	public static AlchemicalBling instance;
 
+	public static File configFile;
+
 	public static Item mundaneAmulet;
 	public static Item infusedAmulet;
 	public static Item ironBottle;
@@ -44,11 +51,13 @@ public class AlchemicalBling {
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		AlchemicalBling.configFile = event.getSuggestedConfigurationFile();
+
 		/* CONFIG */
-		Configuration configuration = new Configuration(event.getSuggestedConfigurationFile());
+		Configuration configuration = new Configuration(configFile);
 		try {
-			registerSilverWithOreDictionary = configuration.get(Configuration.CATEGORY_GENERAL, "registerSilverWithOreDictionary", true).getBoolean(true);
-			allowOreDictionarySilver = configuration.get(Configuration.CATEGORY_GENERAL, "allowOreDictionarySilver", true).getBoolean(true);
+			registerSilverWithOreDictionary = configuration.get(Configuration.CATEGORY_GENERAL, "_registerSilverWithOreDictionary", true).getBoolean(true);
+			allowOreDictionarySilver = configuration.get(Configuration.CATEGORY_GENERAL, "_allowOreDictionarySilver", true).getBoolean(true);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -124,6 +133,26 @@ public class AlchemicalBling {
 				'B', Items.glass_bottle,
 				'D', Items.diamond
 			));
+		}
+	}
+
+	@Mod.EventHandler
+	public void postInit(FMLPostInitializationEvent event) {
+		Configuration configuration = new Configuration(configFile);
+		try {
+			for (Potion potion : Potion.potionTypes) {
+				if (potion != null) {
+					if (!configuration.get(Configuration.CATEGORY_GENERAL, potion.getName(), true).getBoolean(true)) {
+						BlacklistHandler.blacklist(potion.getId());
+					}
+				}
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (configuration.hasChanged()) {
+				configuration.save();
+			}
 		}
 	}
 }

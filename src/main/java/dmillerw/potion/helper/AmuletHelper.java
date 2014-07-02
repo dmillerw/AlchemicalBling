@@ -1,5 +1,6 @@
 package dmillerw.potion.helper;
 
+import dmillerw.potion.handler.BlacklistHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 
@@ -25,10 +26,12 @@ public class AmuletHelper {
 	}
 
 	public static void addPotionEffect(EntityPlayer player, int id, int amplifier) {
-		if (!player.isPotionActive(id)) {
-			player.addPotionEffect(new BaublePotionEffect(id, amplifier));
-		} else {
-			replacePotionEffect(player, id, amplifier);
+		if (BlacklistHandler.canUse(id)) {
+			if (!player.isPotionActive(id)) {
+				player.addPotionEffect(new BaublePotionEffect(id, amplifier));
+			} else {
+				replacePotionEffect(player, id, amplifier);
+			}
 		}
 	}
 

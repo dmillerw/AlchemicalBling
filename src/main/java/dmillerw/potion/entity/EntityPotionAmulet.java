@@ -1,6 +1,7 @@
 package dmillerw.potion.entity;
 
 import dmillerw.potion.AlchemicalBling;
+import dmillerw.potion.handler.BlacklistHandler;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -33,10 +34,12 @@ public class EntityPotionAmulet extends EntityItem {
 	}
 
 	public void onPotionSplash(PotionEffect effect) {
-		ItemStack stack = new ItemStack(AlchemicalBling.infusedAmulet, 1, effect.getPotionID());
-		NBTTagCompound nbt = new NBTTagCompound();
-		nbt.setInteger("amp", effect.getAmplifier());
-		stack.setTagCompound(nbt);
-		this.setEntityItemStack(stack);
+		if (BlacklistHandler.canUse(effect.getPotionID())) {
+			ItemStack stack = new ItemStack(AlchemicalBling.infusedAmulet, 1, effect.getPotionID());
+			NBTTagCompound nbt = new NBTTagCompound();
+			nbt.setInteger("amp", effect.getAmplifier());
+			stack.setTagCompound(nbt);
+			this.setEntityItemStack(stack);
+		}
 	}
 }
