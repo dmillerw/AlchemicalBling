@@ -47,6 +47,8 @@ public class AlchemicalBling {
 	public static Item infusedAmulet;
 	public static Item ingotSilver;
 
+	//TODO Broken amulet?
+
 	/* Ugly, but unfortunately necessary */
 	public static Item bottleIron;
 	public static Item bottleMoltenIron;
@@ -55,8 +57,6 @@ public class AlchemicalBling {
 
 	public static boolean registerSilverWithOreDictionary = true;
 	public static boolean allowOreDictionarySilver = true;
-
-	//TODO Broken amulet?
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {

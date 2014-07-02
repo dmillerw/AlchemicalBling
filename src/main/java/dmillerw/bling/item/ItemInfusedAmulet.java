@@ -120,10 +120,9 @@ public class ItemInfusedAmulet extends Item implements IBauble {
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
-	public boolean hasEffect(ItemStack stack) {
-		return true;
+	public boolean hasEffect(ItemStack par1ItemStack, int pass) {
+		return pass == 0;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -135,13 +134,13 @@ public class ItemInfusedAmulet extends Item implements IBauble {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIconFromDamageForRenderPass(int damage, int pass) {
-		return pass == 0 ? amulet : gem;
+		return pass == 0 ? gem : amulet;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public int getColorFromItemStack(ItemStack stack, int pass) {
-		return pass == 0 ? 16777215 : PotionHelper.func_77915_a(stack.getItemDamage(), false);
+		return pass == 0 ? PotionHelper.func_77915_a(stack.getItemDamage(), false) : 0xFFFFFF;
 	}
 
 	@SideOnly(Side.CLIENT)

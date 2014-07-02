@@ -27,7 +27,7 @@ public class EntityPotionAmulet extends EntityItem {
 
 	public EntityPotionAmulet(EntityItem item) {
 		this(item.worldObj, item.posX, item.posY, item.posZ, item.getEntityItem());
-		this.delayBeforeCanPickup = 100;
+		this.delayBeforeCanPickup = 10;
 		this.motionX = item.motionX;
 		this.motionY = item.motionY;
 		this.motionZ = item.motionZ;
