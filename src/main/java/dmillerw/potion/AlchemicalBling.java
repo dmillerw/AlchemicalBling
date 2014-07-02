@@ -92,7 +92,8 @@ public class AlchemicalBling {
 		/* RECIPES */
 		GameRegistry.addShapelessRecipe(
 			new ItemStack(ironBottle, 1, 0),
-			Items.iron_ingot
+			Items.iron_ingot,
+			Items.glass_bottle
 		);
 
 		GameRegistry.addSmelting(
@@ -119,7 +120,7 @@ public class AlchemicalBling {
 			"IBI",
 			" D ",
 			'I', silverIngot,
-			'B', Items.glass_bottle,
+			'B', new ItemStack(Items.potionitem, 1, OreDictionary.WILDCARD_VALUE),
 			'D', Items.diamond
 		);
 
@@ -130,7 +131,7 @@ public class AlchemicalBling {
 				"IBI",
 				" D ",
 				'I', "ingotSilver",
-				'B', Items.glass_bottle,
+				'B', new ItemStack(Items.potionitem, 1, OreDictionary.WILDCARD_VALUE),
 				'D', Items.diamond
 			));
 		}
