@@ -151,7 +151,7 @@ public class AlchemicalBling {
 
 			/* RING */
 			GameRegistry.addRecipe(new ShapedOreRecipe(
-				new ItemStack(baublePotion, 1, 0),
+				new ItemStack(baublePotion, 1, 1),
 				"DI ",
 				"IBI",
 				" I ",
