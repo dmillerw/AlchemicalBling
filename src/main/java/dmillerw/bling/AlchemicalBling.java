@@ -168,8 +168,9 @@ public class AlchemicalBling {
 		try {
 			for (Potion potion : Potion.potionTypes) {
 				if (potion != null) {
-					if (!configuration.get(Configuration.CATEGORY_GENERAL, potion.getName(), true).getBoolean(true)) {
-						BlacklistHandler.blacklist(potion.getId());
+					boolean enabled = (potion != Potion.regeneration && potion != Potion.heal);
+					if (!configuration.get(Configuration.CATEGORY_GENERAL, potion.getName(), enabled).getBoolean(enabled)) {
+							BlacklistHandler.blacklist(potion.getId());
 					}
 				}
 			}
