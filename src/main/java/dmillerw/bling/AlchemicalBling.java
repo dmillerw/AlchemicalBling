@@ -26,7 +26,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
@@ -36,7 +35,7 @@ import java.io.File;
 /**
  * @author dmillerw
  */
-@Mod(modid = AlchemicalBling.ID, name= AlchemicalBling.NAME, version="%VERSION%", dependencies="required-after:Forge@[%FORGE_VERSION%,);required-after:Baubles")
+@Mod(modid = AlchemicalBling.ID, name= AlchemicalBling.NAME, version="%MOD_VERSION%", dependencies="required-after:Forge@[%FORGE_VERSION%,);required-after:Baubles")
 public class AlchemicalBling {
 
 	public static final String ID = "AlchBling";
