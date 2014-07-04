@@ -15,7 +15,7 @@ import dmillerw.bling.entity.EntitySplashPotion;
 import dmillerw.bling.handler.BlacklistHandler;
 import dmillerw.bling.handler.BrewingHandler;
 import dmillerw.bling.handler.EntityEventHandler;
-import dmillerw.bling.handler.EventHelper;
+import dmillerw.bling.helper.EventHelper;
 import dmillerw.bling.item.ItemBrewableBottle;
 import dmillerw.bling.item.ItemSilverIngot;
 import dmillerw.bling.item.ItemSpiderLeg;
