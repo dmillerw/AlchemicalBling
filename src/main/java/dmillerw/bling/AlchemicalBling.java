@@ -20,7 +20,7 @@ import dmillerw.bling.helper.EventHelper;
 import dmillerw.bling.item.ItemBrewableBottle;
 import dmillerw.bling.item.ItemSilverIngot;
 import dmillerw.bling.item.ItemSpiderLeg;
-import dmillerw.bling.item.armor.ArmorBootsBat;
+import dmillerw.bling.item.armor.ArmorBootsSpider;
 import dmillerw.bling.item.bauble.BaublePotion;
 import dmillerw.bling.recipe.RecipeIronBottle;
 import dmillerw.bling.recipe.RecipeSilver;
@@ -55,7 +55,7 @@ public class AlchemicalBling {
 	public static Item bottleMoltenIron;
 	public static Item bottleSilver;
 	public static Item spiderLeg;
-	public static Item bootsBat;
+	public static Item bootsSpider;
 
 	public static boolean registerSilverWithOreDictionary = true;
 	public static boolean allowOreDictionarySilver = true;
@@ -87,7 +87,7 @@ public class AlchemicalBling {
 
 		spiderLeg = new ItemSpiderLeg().setUnlocalizedName("spider_leg");
 
-		bootsBat = new ArmorBootsBat().setUnlocalizedName("boots.bat");
+		bootsSpider = new ArmorBootsSpider().setUnlocalizedName("boots.spider");
 
 		GameRegistry.registerItem(baublePotion, baublePotion.getUnlocalizedName());
 		GameRegistry.registerItem(ingotSilver, ingotSilver.getUnlocalizedName());
@@ -98,7 +98,7 @@ public class AlchemicalBling {
 
 		GameRegistry.registerItem(spiderLeg, spiderLeg.getUnlocalizedName());
 
-		GameRegistry.registerItem(bootsBat, bootsBat.getUnlocalizedName());
+		GameRegistry.registerItem(bootsSpider, bootsSpider.getUnlocalizedName());
 
 		if (registerSilverWithOreDictionary) {
 			OreDictionary.registerOre("ingotSilver", ingotSilver);
@@ -152,9 +152,9 @@ public class AlchemicalBling {
 			'D', Items.diamond
 		);
 
-		/* BOOTS - BAT */
+		/* BOOTS - SPIDER */
 		GameRegistry.addShapedRecipe(
-			new ItemStack(bootsBat),
+			new ItemStack(bootsSpider),
 			" B ",
 			"L L",
 			'B', Items.leather_boots,
