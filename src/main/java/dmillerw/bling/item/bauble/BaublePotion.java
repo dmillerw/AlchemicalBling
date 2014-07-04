@@ -5,8 +5,8 @@ import baubles.api.IBauble;
 import com.google.common.collect.HashMultimap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import dmillerw.bling.entity.EntityBaublePotion;
-import dmillerw.bling.helper.BaublePotionEffect;
+import dmillerw.bling.entity.EntityPotionBauble;
+import dmillerw.bling.potion.BaublePotionEffect;
 import dmillerw.bling.helper.BaublePotionHelper;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -170,7 +170,7 @@ public class BaublePotion extends Item implements IBauble {
 
 	@Override
 	public Entity createEntity(World world, Entity location, ItemStack itemstack) {
-		return new EntityBaublePotion((EntityItem) location);
+		return new EntityPotionBauble((EntityItem) location);
 	}
 
 	/* MISC */

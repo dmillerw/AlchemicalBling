@@ -1,6 +1,7 @@
 package dmillerw.bling.helper;
 
 import dmillerw.bling.handler.BlacklistHandler;
+import dmillerw.bling.potion.BaublePotionEffect;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

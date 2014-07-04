@@ -10,21 +10,21 @@ import net.minecraft.world.World;
 /**
  * @author dmillerw
  */
-public class EntityBaublePotion extends EntityItem {
+public class EntityPotionBauble extends EntityItem {
 
-	public EntityBaublePotion(World world) {
+	public EntityPotionBauble(World world) {
 		super(world);
 	}
 
-	public EntityBaublePotion(World world, double posX, double posY, double posZ) {
+	public EntityPotionBauble(World world, double posX, double posY, double posZ) {
 		super(world, posX, posY, posZ);
 	}
 
-	public EntityBaublePotion(World world, double posX, double posY, double posZ, ItemStack stack) {
+	public EntityPotionBauble(World world, double posX, double posY, double posZ, ItemStack stack) {
 		super(world, posX, posY, posZ, stack);
 	}
 
-	public EntityBaublePotion(EntityItem item) {
+	public EntityPotionBauble(EntityItem item) {
 		this(item.worldObj, item.posX, item.posY, item.posZ, item.getEntityItem());
 		this.delayBeforeCanPickup = 10;
 		this.motionX = item.motionX;

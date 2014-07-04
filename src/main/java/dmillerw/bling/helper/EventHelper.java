@@ -1,4 +1,4 @@
-package dmillerw.bling.handler;
+package dmillerw.bling.helper;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -15,8 +15,12 @@ public class EventHelper {
 
 	public static void batchRegister(Type type, Side side, Object ... objects) {
 		for (Object obj : objects) {
-			MinecraftForge.EVENT_BUS.register(obj);
+			register(type, side, obj);
 		}
+	}
+
+	public static void register(Type type, Object instance) {
+		register(type, null, instance);
 	}
 
 	public static void register(Type type, Side side, Object instance) {
