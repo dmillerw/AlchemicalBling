@@ -1,12 +1,16 @@
 package dmillerw.bling;
 
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
 import dmillerw.bling.client.render.PotionEffectRenderer;
+import dmillerw.bling.client.render.RenderCrippledSpider;
 import dmillerw.bling.entity.EntityBaublePotion;
+import dmillerw.bling.entity.EntityCrippledSpider;
 import dmillerw.bling.entity.EntitySplashPotion;
 import dmillerw.bling.handler.BlacklistHandler;
 import dmillerw.bling.handler.BrewingHandler;
@@ -14,6 +18,7 @@ import dmillerw.bling.handler.EntityEventHandler;
 import dmillerw.bling.handler.EventHelper;
 import dmillerw.bling.item.ItemBrewableBottle;
 import dmillerw.bling.item.ItemSilverIngot;
+import dmillerw.bling.item.ItemSpiderLeg;
 import dmillerw.bling.item.bauble.BaublePotion;
 import dmillerw.bling.recipe.RecipeIronBottle;
 import dmillerw.bling.recipe.RecipeSilver;
@@ -44,14 +49,11 @@ public class AlchemicalBling {
 
 	public static Item baublePotion;
 	public static Item ingotSilver;
-
 	//TODO Broken amulet?
-
-	/* Ugly, but unfortunately necessary */
 	public static Item bottleIron;
 	public static Item bottleMoltenIron;
 	public static Item bottleSilver;
-	/* End the ugliness! */
+	public static Item spiderLeg;
 
 	public static boolean registerSilverWithOreDictionary = true;
 	public static boolean allowOreDictionarySilver = true;
@@ -81,6 +83,8 @@ public class AlchemicalBling {
 		bottleMoltenIron = new ItemBrewableBottle(ItemBrewableBottle.MOLTEN_IRON.getRGB()).setUnlocalizedName("bottle.molten_iron");
 		bottleSilver = new ItemBrewableBottle(ItemBrewableBottle.SILVER.getRGB()).setUnlocalizedName("bottle.silver");
 
+		spiderLeg = new ItemSpiderLeg().setUnlocalizedName("spider_leg");
+
 		GameRegistry.registerItem(baublePotion, baublePotion.getUnlocalizedName());
 		GameRegistry.registerItem(ingotSilver, ingotSilver.getUnlocalizedName());
 
@@ -88,20 +92,25 @@ public class AlchemicalBling {
 		GameRegistry.registerItem(bottleMoltenIron, bottleMoltenIron.getUnlocalizedName());
 		GameRegistry.registerItem(bottleSilver, bottleSilver.getUnlocalizedName());
 
-		/* FILL STATIC REFERENCES */
-
+		GameRegistry.registerItem(spiderLeg, spiderLeg.getUnlocalizedName());
 
 		if (registerSilverWithOreDictionary) {
 			OreDictionary.registerOre("ingotSilver", ingotSilver);
 		}
 
-		if (event.getSide().isClient()) {
-			MinecraftForge.EVENT_BUS.register(new PotionEffectRenderer());
-		}
-		EventHelper.batchRegister(new EntityEventHandler(), new BrewingHandler());
+		EventHelper.register(EventHelper.Type.FORGE, Side.CLIENT, new PotionEffectRenderer());
+		EventHelper.register(EventHelper.Type.FORGE, null, new EntityEventHandler());
+		EventHelper.register(EventHelper.Type.FORGE, null, new BrewingHandler());
 
 		EntityRegistry.registerModEntity(EntitySplashPotion.class, "splashPotion", 1, AlchemicalBling.instance, 64, 64, true);
 		EntityRegistry.registerModEntity(EntityBaublePotion.class, "potionAmulet", 2, AlchemicalBling.instance, 64, 64, true);
+
+		EntityRegistry.registerGlobalEntityID(EntityCrippledSpider.class, "crippledSpider", EntityRegistry.findGlobalUniqueEntityId(), 10031615, 16755370);
+		EntityRegistry.registerModEntity(EntityCrippledSpider.class, "crippledSpider", 3, AlchemicalBling.instance, 64, 3, true);
+
+		if (event.getSide().isClient()) {
+			RenderingRegistry.registerEntityRenderingHandler(EntityCrippledSpider.class, new RenderCrippledSpider());
+		}
 
 		/* RECIPES */
 		GameRegistry.addRecipe(new RecipeIronBottle());
