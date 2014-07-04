@@ -15,10 +15,12 @@ import dmillerw.bling.entity.EntitySplashPotion;
 import dmillerw.bling.handler.BlacklistHandler;
 import dmillerw.bling.handler.BrewingHandler;
 import dmillerw.bling.handler.EntityEventHandler;
+import dmillerw.bling.handler.PlayerTickHandler;
 import dmillerw.bling.helper.EventHelper;
 import dmillerw.bling.item.ItemBrewableBottle;
 import dmillerw.bling.item.ItemSilverIngot;
 import dmillerw.bling.item.ItemSpiderLeg;
+import dmillerw.bling.item.armor.ArmorBootsBat;
 import dmillerw.bling.item.bauble.BaublePotion;
 import dmillerw.bling.recipe.RecipeIronBottle;
 import dmillerw.bling.recipe.RecipeSilver;
@@ -53,6 +55,7 @@ public class AlchemicalBling {
 	public static Item bottleMoltenIron;
 	public static Item bottleSilver;
 	public static Item spiderLeg;
+	public static Item bootsBat;
 
 	public static boolean registerSilverWithOreDictionary = true;
 	public static boolean allowOreDictionarySilver = true;
@@ -84,6 +87,8 @@ public class AlchemicalBling {
 
 		spiderLeg = new ItemSpiderLeg().setUnlocalizedName("spider_leg");
 
+		bootsBat = new ArmorBootsBat().setUnlocalizedName("boots.bat");
+
 		GameRegistry.registerItem(baublePotion, baublePotion.getUnlocalizedName());
 		GameRegistry.registerItem(ingotSilver, ingotSilver.getUnlocalizedName());
 
@@ -93,13 +98,16 @@ public class AlchemicalBling {
 
 		GameRegistry.registerItem(spiderLeg, spiderLeg.getUnlocalizedName());
 
+		GameRegistry.registerItem(bootsBat, bootsBat.getUnlocalizedName());
+
 		if (registerSilverWithOreDictionary) {
 			OreDictionary.registerOre("ingotSilver", ingotSilver);
 		}
 
 		EventHelper.register(EventHelper.Type.FORGE, Side.CLIENT, new PotionEffectRenderer());
-		EventHelper.register(EventHelper.Type.FORGE, null, new EntityEventHandler());
-		EventHelper.register(EventHelper.Type.FORGE, null, new BrewingHandler());
+		EventHelper.register(EventHelper.Type.FORGE, new EntityEventHandler());
+		EventHelper.register(EventHelper.Type.FORGE, new BrewingHandler());
+		EventHelper.register(EventHelper.Type.FML, new PlayerTickHandler());
 
 		EntityRegistry.registerModEntity(EntitySplashPotion.class, "splashPotion", 1, AlchemicalBling.instance, 64, 64, true);
 		EntityRegistry.registerModEntity(EntityPotionBauble.class, "potionAmulet", 2, AlchemicalBling.instance, 64, 64, true);
@@ -144,6 +152,14 @@ public class AlchemicalBling {
 			'D', Items.diamond
 		);
 
+		/* BOOTS - BAT */
+		GameRegistry.addShapedRecipe(
+			new ItemStack(bootsBat),
+			" B ",
+			"L L",
+			'B', Items.leather_boots,
+			'L', spiderLeg
+		);
 
 		if (allowOreDictionarySilver) {
 			/* AMULET */
