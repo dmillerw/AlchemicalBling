@@ -51,12 +51,12 @@ public class EntitySplashPotion extends EntityPotion {
 
 			if (effects != null && !effects.isEmpty()) {
 				AxisAlignedBB aabb = this.boundingBox.expand(4.0D, 2.0D, 4.0D);
-				List items = this.worldObj.getEntitiesWithinAABB(EntityBaublePotion.class, aabb);
+				List items = this.worldObj.getEntitiesWithinAABB(EntityPotionBauble.class, aabb);
 
 				if (items != null && !items.isEmpty()) {
 					Iterator iterator = items.iterator();
 					while (iterator.hasNext()) {
-						EntityBaublePotion amulet = (EntityBaublePotion) iterator.next();
+						EntityPotionBauble amulet = (EntityPotionBauble) iterator.next();
 						amulet.onPotionSplash((PotionEffect) effects.get(0)); //TODO Multiple effects
 					}
 				}

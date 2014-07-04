@@ -9,7 +9,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import dmillerw.bling.client.render.PotionEffectRenderer;
 import dmillerw.bling.client.render.RenderCrippledSpider;
-import dmillerw.bling.entity.EntityBaublePotion;
+import dmillerw.bling.entity.EntityPotionBauble;
 import dmillerw.bling.entity.EntityCrippledSpider;
 import dmillerw.bling.entity.EntitySplashPotion;
 import dmillerw.bling.handler.BlacklistHandler;
@@ -102,7 +102,7 @@ public class AlchemicalBling {
 		EventHelper.register(EventHelper.Type.FORGE, null, new BrewingHandler());
 
 		EntityRegistry.registerModEntity(EntitySplashPotion.class, "splashPotion", 1, AlchemicalBling.instance, 64, 64, true);
-		EntityRegistry.registerModEntity(EntityBaublePotion.class, "potionAmulet", 2, AlchemicalBling.instance, 64, 64, true);
+		EntityRegistry.registerModEntity(EntityPotionBauble.class, "potionAmulet", 2, AlchemicalBling.instance, 64, 64, true);
 
 		EntityRegistry.registerGlobalEntityID(EntityCrippledSpider.class, "crippledSpider", EntityRegistry.findGlobalUniqueEntityId(), 10031615, 16755370);
 		EntityRegistry.registerModEntity(EntityCrippledSpider.class, "crippledSpider", 3, AlchemicalBling.instance, 64, 3, true);
